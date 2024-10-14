@@ -1,7 +1,8 @@
 import "./Card.css";
 import { useEffect, useState } from "react";
-export function Card({ pokeNum }) {
+export function Card({ pokeNum, onClick }) {
   const [pokemon, setPokemon] = useState(null);
+
   useEffect(() => {
     let ignore = false;
     fetch("https://pokeapi.co/api/v2/pokemon/" + pokeNum)
@@ -9,7 +10,6 @@ export function Card({ pokeNum }) {
         return response.json();
       })
       .then((data) => {
-        console.log(data.results);
         if (!ignore) {
           setPokemon(data);
         }
@@ -18,10 +18,10 @@ export function Card({ pokeNum }) {
     return () => {
       ignore = true;
     };
-  }, []);
+  }, [pokeNum]);
 
   return pokemon ? (
-    <button className="card">
+    <button data-id={pokeNum} className="card" onClick={onClick}>
       <img src={pokemon.sprites.front_default} />
       <h2> {pokemon.name}</h2>
     </button>
