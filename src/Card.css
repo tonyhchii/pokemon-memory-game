@@ -2,3 +2,7 @@
   border: 1px solid;
   padding: 2rem;
 }
+
+.card:hover {
+  transform: scale(1.02);
+}
