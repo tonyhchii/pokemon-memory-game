@@ -1,8 +1,53 @@
+* {
+  --fire: rgba(245, 176, 39, 0.5);
+  --cardBorder: #ffd531;
+  --cardHover: rgba(255, 255, 0, 1);
+}
 .card {
-  border: 1px solid;
-  padding: 2rem;
+  width: 10rem;
+  height: 12rem;
+  background-color: transparent;
+  transition: transform 0.5s;
+  perspective: 1000px;
 }
 
-.card:hover {
-  transform: scale(1.02);
+.card-header {
+  margin: 0.3rem;
+  text-wrap: pretty;
+  text-align: left;
+  max-width: 100%;
+}
+
+.card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+
+.card-front,
+.card-back {
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  -webkit-backface-visibility: hidden; /* Safari */
+  backface-visibility: hidden;
+}
+
+.card-front {
+  border: 0.5rem solid var(--cardBorder);
+  background-color: var(--fire);
+}
+
+.card-back {
+  background-image: url(assets/cardBack.jpg);
+  background-size: contain;
+  background-repeat: no-repeat;
+  color: white;
+}
+
+.flip {
+  transform: rotateY(180deg);
 }

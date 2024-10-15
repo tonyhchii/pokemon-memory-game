@@ -1,6 +1,7 @@
 import "./App.css";
 import { useState } from "react";
 import { GameBoard } from "./GameBoard";
+import { ButtonContainer } from "./ButtonContainer";
 
 function App() {
   const [displayGame, setDisplayGame] = useState(false);
@@ -18,9 +19,11 @@ function App() {
     reset();
   }
 
-  function handleResult(e) {
+  async function handleResult(e) {
     const id = e.currentTarget.dataset.id;
-    setPokeArray(shuffle(pokeArray));
+    flipCards();
+    await setTimeout(() => setPokeArray(shuffle(pokeArray)), 600);
+    await setTimeout(() => flipCards(), 1000);
     if (!memo.includes(id)) {
       setScore(score + 1);
       setMemo([...memo, id]);
@@ -36,81 +39,10 @@ function App() {
 
   return (
     <>
-      <h1>POKEMON MEMORY GAME</h1>
-      <div className="btn-container">
-        <button
-          className="btn"
-          data-min="1"
-          data-max="151"
-          onClick={handleStart}
-        >
-          Gen 1
-        </button>
-        <button
-          className="btn"
-          data-min="152"
-          data-max="251"
-          onClick={handleStart}
-        >
-          Gen 2
-        </button>
-        <button
-          className="btn"
-          data-min="252"
-          data-max="386"
-          onClick={handleStart}
-        >
-          Gen 3
-        </button>
-        <button
-          className="btn"
-          data-min="387"
-          data-max="493"
-          onClick={handleStart}
-        >
-          Gen 4
-        </button>
-        <button
-          className="btn"
-          data-min="494"
-          data-max="649"
-          onClick={handleStart}
-        >
-          Gen 5
-        </button>
-        <button
-          className="btn"
-          data-min="650"
-          data-max="721"
-          onClick={handleStart}
-        >
-          Gen 6
-        </button>
-        <button
-          className="btn"
-          data-min="722"
-          data-max="809"
-          onClick={handleStart}
-        >
-          Gen 7
-        </button>
-        <button
-          className="btn"
-          data-min="810"
-          data-max="905"
-          onClick={handleStart}
-        >
-          Gen 8
-        </button>
-        <button
-          className="btn"
-          data-min="906"
-          data-max="1025"
-          onClick={handleStart}
-        >
-          Gen 9
-        </button>
+      <div className="header container">
+        <h1>POKEMON MEMORY GAME</h1>
       </div>
+      <ButtonContainer handleStart={handleStart} />
       {displayGame && (
         <GameBoard
           pokeArray={pokeArray}
@@ -156,4 +88,11 @@ function shuffle(array) {
   }
 
   return newArr;
+}
+
+function flipCards() {
+  const cards = document.querySelectorAll(".card-inner");
+  cards.forEach((card) => {
+    card.classList.toggle("flip");
+  });
 }

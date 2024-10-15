@@ -21,9 +21,18 @@ export function Card({ pokeNum, onClick }) {
   }, [pokeNum]);
 
   return pokemon ? (
-    <button data-id={pokeNum} className="card" onClick={onClick}>
-      <img src={pokemon.sprites.front_default} />
-      <h2> {pokemon.name.toUpperCase()}</h2>
+    <button data-id={pokeNum} className={"card"} onClick={onClick}>
+      <div className="card-inner">
+        <div className="card-front">
+          <div className="card-header">
+            <p> {pokemon.name.toUpperCase()}</p>
+          </div>
+          <div className="card-img">
+            <img src={pokemon.sprites.front_default} />
+          </div>
+        </div>
+        <div className="card-back flip"></div>
+      </div>
     </button>
   ) : (
     <button>loading..</button>

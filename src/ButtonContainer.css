@@ -1,0 +1,10 @@
+.btn {
+  padding: 0.5rem 1rem;
+}
+
+.btn.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
