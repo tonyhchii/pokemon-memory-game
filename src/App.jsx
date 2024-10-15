@@ -43,13 +43,14 @@ function App() {
         <h1>POKEMON MEMORY GAME</h1>
       </div>
       <ButtonContainer handleStart={handleStart} />
-      {displayGame && (
+      {displayGame && score != 12 && (
         <GameBoard
           pokeArray={pokeArray}
           handleResult={handleResult}
           score={score}
         />
       )}
+      {score === 12 && <h1>YOU WIN!!!!</h1>}
     </>
   );
 }
